@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var image = new Image();
+        var canvas = document.createElement("canvas");
+        document.body.appendChild(canvas);
+        canvas.width  = image.width;
+        canvas.height = image.height;
+        image.src = "uwaga.jpg";
+        document.body.appendChild(image);
+        var ctx= canvas.getContext("2d");
+        ctx.drawImage(image);
+    </script>
+</body>
+</html>
+
+
+
+
+this.update = function () {
+    console.log("clickCount:" + clickCount + " blueTowerClick:" + blueTowerClick + " greenTowerClick:" + greenTowerClick);
+    if (greenTowerClick == 0 && blueTowerClick == 0 && yellowTowerClick == 0 && redTowerClick == 0 && clickCount > 0 && mouseClickX >= showTowerMenu1.x + 30 && mouseClickX <= showTowerMenu1.x + 70 && mouseClickY >= showTowerMenu1.y + 50 && mouseClickY <= showTowerMenu1.y + 90 && (towerMenuDisplayed % 2)) {
+        document.getElementById("xy").innerHTML = "clicked blue tower";
+        blueTowerClick++;
+    }
+    else if (greenTowerClick == 0 && blueTowerClick == 0 && yellowTowerClick == 0 && redTowerClick == 0 && (mouseClickX < showTowerMenu1.x + 30 || mouseClickX > showTowerMenu1.x + 70 || mouseClickY < showTowerMenu1.y + 50 || mouseClickY > showTowerMenu1.y + 90)) {
+        blueTowerClick = 0;
+        clickCount = -1;
+    }
+    if (blueTowerClick > 0) {
+        this.ctx.fillStyle = "#76E5FC";
+        this.ctx.fillRect(mouseX - 35, mouseY - 35, 50, 50);
+    }
+    if (clickCount > 2 && blueTowerClick > 0) {
+        towers[towerCount] = new createTower(mouseClickX - 35, mouseClickY - 35, 50, 50, "blue");
+        projectileIntervals[towerCount] = setInterval(spawnProjectiles, 200, i);
+        towerCount++;
+        i++;
+        clickCount = -1;
+        blueTowerClick = 0;
+    }
+    if (greenTowerClick == 0 && blueTowerClick == 0 && yellowTowerClick == 0 && redTowerClick == 0 && clickCount > 0 && mouseClickX >= showTowerMenu1.x + 90 && mouseClickX <= showTowerMenu1.x + 130 && mouseClickY >= showTowerMenu1.y + 50 && mouseClickY <= showTowerMenu1.y + 90 && (towerMenuDisplayed % 2)) {
+        document.getElementById("xy").innerHTML = "clicked green tower";
+        greenTowerClick++;
+    }
+    else if (greenTowerClick == 0 && blueTowerClick == 0 && yellowTowerClick == 0 && redTowerClick == 0 && (mouseClickX < showTowerMenu1.x + 90 || mouseClickX > showTowerMenu1.x + 130 || mouseClickY < showTowerMenu1.y + 50 || mouseClickY > showTowerMenu1.y + 90)) {
+        greenTowerClick = 0;
+        clickCount = -1;
+    }
+    if (greenTowerClick > 0) {
+        this.ctx.fillStyle = "#8DE969";
+        this.ctx.fillRect(mouseX - 35, mouseY - 35, 50, 50);
+    }
+    if (clickCount > 2 && greenTowerClick > 0) {
+        towers[towerCount] = new createTower(mouseClickX - 35, mouseClickY - 35, 50, 50, "green");
+        projectileIntervals[towerCount] = setInterval(spawnProjectiles, 200, i);
+        towerCount++;
+        i++;
+        clickCount = -1;
+        greenTowerClick = 0;
+    }
+    if (mouseClickX >= showTowerMenu1.x + 30 && mouseClickX <= showTowerMenu1.x + 70 && mouseClickY >= showTowerMenu1.y + 120 && mouseClickY <= showTowerMenu1.y + 160 && (towerMenuDisplayed % 2))
+        document.getElementById("xy").innerHTML = "clicked pink tower";
+    if (mouseClickX >= showTowerMenu1.x + 90 && mouseClickX <= showTowerMenu1.x + 130 && mouseClickY >= showTowerMenu1.y + 120 && mouseClickY <= showTowerMenu1.y + 160 && (towerMenuDisplayed % 2))
+        document.getElementById("xy").innerHTML = "clicked yellow tower";
+}
